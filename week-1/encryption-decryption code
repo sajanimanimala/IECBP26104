@@ -1,0 +1,91 @@
+mport java.util.Scanner;
+
+public class DigitTransform {
+
+    // Validate input
+    public static boolean isValid(String input) {
+        // must be 6 digits
+        if (input.length() != 6) return false;
+
+        // must be numeric
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+
+        // must be between 100000 and 999999
+        int num = Integer.parseInt(input);
+        return num >= 100000 && num <= 999999;
+    }
+
+    // Add 6 to each digit
+    public static String addSix(String input) {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            int digit = input.charAt(i) - '0';
+            digit = (digit + 6) % 10;
+            result.append((char)(digit + '0'));
+        }
+        return result.toString();
+    }
+
+    // Swap digits
+    public static String swapDigits(String input) {
+        char[] arr = input.toCharArray();
+
+        // 1 ↔ 3
+        char temp = arr[0];
+        arr[0] = arr[2];
+        arr[2] = temp;
+
+        // 2 ↔ 4
+        temp = arr[1];
+        arr[1] = arr[3];
+        arr[3] = temp;
+
+        // 5 ↔ 6
+        temp = arr[4];
+        arr[4] = arr[5];
+        arr[5] = temp;
+
+        return new String(arr);
+    }
+
+    // Subtract 6
+    public static String subtractSix(String input) {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            int digit = input.charAt(i) - '0';
+            digit = (digit - 6 + 10) % 10;
+            result.append((char)(digit + '0'));
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a 6-digit number (100000–999999): ");
+        String original = sc.next();
+
+        if (!isValid(original)) {
+            System.out.println("❌ Invalid input. Please enter a valid 6-digit number.");
+            return;
+        }
+
+        String A = addSix(original);
+        System.out.println("A: " + A);
+
+        String B = swapDigits(A);
+        System.out.println("B: " + B);
+
+        String C = subtractSix(B);
+        System.out.println("C: " + C);
+
+        String decoded = swapDigits(C);
+        System.out.println("Decoded (Original): " + decoded);
+    }
+}
