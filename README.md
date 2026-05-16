@@ -15,7 +15,7 @@ Week 3 :(29th - 6th May): Collaboratively building a testing mechanism using giv
 
 
 
-Week 4:(6th - 13th May): Building a landing page.
+Week 4:(6th - 13th May): Building a landing page, Scenarios page, JSON data load
 
 
 
